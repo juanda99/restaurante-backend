@@ -1,8 +1,6 @@
 const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2')
-const https = require('https')
-const fs = require('fs')
 require('dotenv').config()
 
 const app = express()
@@ -115,12 +113,6 @@ app.get('/order/:orderId/dishes', (req, res) => {
 })
 
 // Start the server
-const privateKey = fs.readFileSync('server.key', 'utf8')
-const certificate = fs.readFileSync('server.cert', 'utf8')
-const credentials = { key: privateKey, cert: certificate }
-
-const httpsServer = https.createServer(credentials, app)
-
-httpsServer.listen(port, () => {
-  console.log(`HTTPS Server is running on port ${port}`)
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`)
 })
